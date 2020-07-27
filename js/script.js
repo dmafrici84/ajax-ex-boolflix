@@ -39,13 +39,12 @@ $(document).ready(init);
 
         for (var i = 0; i < risultatoRicerca.length; i++) {
           var voto = risultatoRicerca[i]["vote_average"];
-          var votoTrasformato = trasformaNumInStella(voto);
-          var filmHtml = compiled ({
-            "title": risultatoRicerca[i]["title"],
-            "original_title": risultatoRicerca[i]["original_title"],
-            "original_language": risultatoRicerca[i]["original_language"],
-            "vote_average": votoTrasformato
-          });
+
+          var risultato = risultatoRicerca[i];
+
+          risultato["vote_average"] = trasformaVotoInStella(voto);
+          // var vote_average = trasformaVotoInStella(voto);
+          var filmHtml = compiled (risultato);
           targetListaFilms.append(filmHtml)
         }
       },
@@ -57,15 +56,15 @@ $(document).ready(init);
     });
   }
 
-  function trasformaNumInStella(voto) {
+  function trasformaVotoInStella(voto) {
     var votoInteroStella = Math.round(voto / 2);
-    var targetVoto = $("#voto");
-    targetVoto.html("");
+    var votoStella = "";
     for (var i = 1; i <= 5; i++) {
       if(i <= votoInteroStella) {
-        var votoStella = targetVoto.append('<i class="fas fa-star"></i>');
+        votoStella += '<i class="fas fa-star"></i>';
       } else {
-        var votoStella = targetVoto.append('<i class="far fa-star"></i>');
+        votoStella += '<i class="far fa-star"></i>';
       }
     }
+    return votoStella;
   }
