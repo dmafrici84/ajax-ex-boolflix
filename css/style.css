@@ -58,6 +58,11 @@ ul {
 .film span {
   font-size: 18px;
   color: #616467;
+  line-height: 1.5;
+}
+
+.film span img {
+  height: 15px;
 }
 
 .film span i {

@@ -38,12 +38,14 @@ $(document).ready(init);
         targetListaFilms.html("");
 
         for (var i = 0; i < risultatoRicerca.length; i++) {
-          var voto = risultatoRicerca[i]["vote_average"];
-
           var risultato = risultatoRicerca[i];
 
+          var voto = risultatoRicerca[i]["vote_average"];
           risultato["vote_average"] = trasformaVotoInStella(voto);
-          // var vote_average = trasformaVotoInStella(voto);
+
+          var lingua = risultato["original_language"];
+          risultato["original_language"] = trasformaLinguaInBandiera(lingua);
+
           var filmHtml = compiled (risultato);
           targetListaFilms.append(filmHtml)
         }
@@ -67,4 +69,29 @@ $(document).ready(init);
       }
     }
     return votoStella;
+  }
+
+  function trasformaLinguaInBandiera(lingua) {
+    var bandiera = lingua;
+    if (lingua === "en") {
+      bandiera = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png" alt="">'
+      return bandiera;
+    } else if (lingua === "it") {
+      bandiera = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/640px-Flag_of_Italy.svg.png" alt="">'
+      return bandiera;
+    } else if (lingua === "fr") {
+      bandiera = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/280px-Flag_of_France.svg.png" alt="">'
+      return bandiera;
+    } else if (lingua === "es") {
+      bandiera = '<img src="https://images-na.ssl-images-amazon.com/images/I/41vY%2BlH0M2L._AC_SX450_.jpg" alt="">'
+      return bandiera;
+    } else if (lingua === "cn") {
+      bandiera = '<img src="https://www.corriereasia.com/wp-content/uploads/bandiera-della-cina.png" alt="">'
+      return bandiera;
+    } else if (lingua === "ja") {
+      bandiera = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/280px-Flag_of_Japan.svg.png" alt="">'
+      return bandiera;
+    } else {
+      return bandiera;
+    }
   }
