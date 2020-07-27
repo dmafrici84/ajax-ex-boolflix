@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>ajax-ex-boolflix</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Moment -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <!-- Moment ita -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/it.min.js"></script>
+    <!-- Handlebars -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
+    <!-- Template -->
+    <script id="template-film" type="text/x-handlebars-template">
+      <li class="film">
+        <span>Titolo: {{title}}</span>
+        <span>Titolo Originale: {{original_title}}</span>
+        <span>Lingua: {{original_language}}</span>
+        <span>Voto: {{vote_average}}</span>
+      </li>
+    </script>
+
+    <!-- JavaScript -->
+    <script type="text/javascript" src="js/script.js"></script>
+  </head>
+  <body>
+    <header>
+      <input id="input-cerca" type="text" name="cerca" value="" placeholder="Titolo film">
+      <button id="btn-cerca" type="button" name="button">Cerca</button>
+    </header>
+    <main>
+      <div class="contenitore">
+        <ul id="lista-films">
+
+        </ul>
+      </div>
+    </main>
+  </body>
+</html>
