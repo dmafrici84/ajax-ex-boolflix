@@ -33,7 +33,8 @@ header {
   border-radius: 4px;
   margin-left: 15px;
   background-color: #1E2D3B;
-  color: #fff;
+  color: #616467;
+  border: solid 1px #616467;
   cursor: pointer;
 }
 
@@ -56,5 +57,14 @@ ul {
 
 .film span {
   font-size: 18px;
-  color: #fff;
+  color: #616467;
+}
+
+.film span i {
+  font-size: 15px;
+  color: #616467;
+}
+
+.giallo {
+  background-color: #b8e600;
 }
