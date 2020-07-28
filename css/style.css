@@ -49,27 +49,51 @@ ul {
 }
 
 .film {
+  max-height: 180px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.film .copertina {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 180px;
+  background-color: rgba(255,255,255,0.5);
+  text-align: center;
 }
 
-.film span {
+.film .copertina img {
+  max-width: 120px;
+  min-width: 80px;
+}
+
+.film .info-film {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.film .info-film span {
   font-size: 18px;
   color: #616467;
-  line-height: 1.5;
+  line-height: 2.2;
 }
 
-.film .nero {
+.film .info-film .nero {
   color: #000;
 }
 
-.film span img {
+.film .info-film span img {
   height: 15px;
   max-width: 20px;
 }
 
-.film span i {
+.film .info-film span i {
   font-size: 15px;
   color: #616467;
 }
