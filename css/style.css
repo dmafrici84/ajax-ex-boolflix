@@ -46,40 +46,60 @@ ul {
   flex-wrap: wrap;
 }
 
-.link-nav ul li {
+nav ul li {
   margin-right: 20px;
 }
 
 a {
   text-decoration: none;
   color: #dde8ed;
-  font-size: 20px
+  font-size: 20px;
 }
 
-.link-nav ul li a:hover {
+.cerca-nav  ul li a {
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  padding-left: 20px;
+  border-left: solid 1px #dde8ed;
+}
+
+.cerca-nav ul li a i {
+  font-weight: 700;
+  font-size: 19px;
+}
+
+nav ul li a:hover {
   color: #fff;
 }
 
-#input-cerca {
-  width: 200px;
-  padding: 4px;
+.cerca {
+  width: 265px;
+  padding: 0 15px;
   font-size: 18px;
-  border-radius: 4px;
-  border: 0;
-  font-family: Roboto, sans-serif;
+  border-radius: 20px;
+  background-color: #dde8ed;
+  color: #616467;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-#btn-cerca {
-  width: 80px;
+#input-cerca {
+  width: 210px;
   padding: 4px;
-  font-size: 18px;
-  border-radius: 4px;
-  margin-left: 15px;
-  background-color: #1E2D3B;
-  color: #dde8ed;
-  border: solid 1px #616467;
-  cursor: pointer;
+  font-size: 17px;
+  border: 0;
   font-family: Roboto, sans-serif;
+  background-color: #dde8ed;
+  color: rgb(46, 58, 70);
+}
+
+.cerca #cerca {
+  cursor: pointer;
+}
+
+.cerca #cerca:hover {
+  color: #fff;
 }
 
 .contenitore-films {
@@ -154,7 +174,7 @@ a {
 }
 
 .film .info-film .bianco {
-  color: #fff;
+  color: #dde8ed;
 }
 
 .film .info-film .nero {
