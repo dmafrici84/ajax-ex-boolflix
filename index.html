@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- Fontawesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Moment -->
@@ -21,11 +23,14 @@
         <div class="copertina">
           {{{poster_path}}}
         </div>
-        <div class="info-film">
-          <span class="nero">Titolo: <span>{{title}}{{name}}</span></span>
-          <span class="nero">Titolo Originale: <span>{{original_title}}{{original_name}}</span></span>
-          <span class="nero">Lingua: <span>{{{original_language}}}</span></span>
-          <span class="nero">Voto: <span>{{{vote_average}}}</span></span>
+        <div class="contenitore-info-film">
+          <div class="info-film">
+            <span class="bianco">Titolo: <span>{{title}}{{name}}</span></span>
+            <span class="bianco">Titolo Originale: <span>{{original_title}}{{original_name}}</span></span>
+            <span class="bianco">Lingua Originale: <span>{{{original_language}}}</span></span>
+            <span class="bianco">Voto: <span>{{{vote_average}}}</span></span>
+            <p>{{overview}}</p>
+          </div>
         </div>
       </li>
     </script>
@@ -35,11 +40,25 @@
   </head>
   <body>
     <header>
-      <input id="input-cerca" type="text" name="cerca" value="" placeholder="Titolo film">
-      <button id="btn-cerca" type="button" name="button">Cerca</button>
+      <div class="logo">
+        <a href="#"><h2>BOOLFLIX</h2></a>
+      </div>
+      <nav>
+        <div class="link-nav">
+          <ul>
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">CINEMA</a></li>
+            <li><a href="#">SERIE TV</a></li>
+          </ul>
+        </div>
+        <div class="cerca-nav">
+          <input id="input-cerca" type="text" name="cerca" value="" placeholder="Titolo film">
+          <button id="btn-cerca" type="button" name="button">Cerca</button>
+        </div>
+      </nav>
     </header>
     <main>
-      <div class="contenitore">
+      <div class="contenitore-films">
         <ul id="lista-films">
         </ul>
       </div>

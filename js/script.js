@@ -106,7 +106,7 @@ $(document).ready(init);
     var votoStella = "";
     for (var i = 1; i <= 5; i++) {
       if(i <= votoInteroStella) {
-        votoStella += '<i class="fas fa-star"></i>';
+        votoStella += '<i class="fas fa-star giallo"></i>';
       } else {
         votoStella += '<i class="far fa-star"></i>';
       }
@@ -146,7 +146,7 @@ $(document).ready(init);
       copertinaFilm = '<img src="'+ url + dimensioneImg + copertina + '" alt="">';
       return copertinaFilm;
     } else {
-      copertinaFilm = '<img src="img/smiley-sad.png" alt="">' + '<span class="nero">Nessuna immagine</span>';
+      copertinaFilm = '<img class="smile" src="img/smiley-sad.png" alt="">' + '<span class="nero">Nessuna immagine</span>';
       return copertinaFilm;
     }
   }
