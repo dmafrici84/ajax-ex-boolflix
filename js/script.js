@@ -12,14 +12,16 @@ $(document).ready(init);
 
   function clicKBtn() {
     var btnCerca = $("#btn-cerca");
-    btnCerca.click(stampaFilms);
+    btnCerca.click(function(){
+      var apiKey = "a8241a9208f83d8e2fe41ee42b017580";
+      var cercaTitoloFilm = $("#input-cerca").val();
+      var lingua = "it-IT";
+      stampaFilms(apiKey,cercaTitoloFilm,lingua);
+      stampaSeieTv(apiKey,cercaTitoloFilm,lingua);
+    });
   }
 
-  function stampaFilms() {
-    var apiKey = "a8241a9208f83d8e2fe41ee42b017580";
-    var cercaTitoloFilm = $("#input-cerca").val();
-    var lingua = "it-IT";
-
+  function stampaFilms(apiKey,cercaTitoloFilm,lingua) {
     $.ajax({
       url: "https://api.themoviedb.org/3/search/movie",
       method: "GET",
@@ -29,7 +31,7 @@ $(document).ready(init);
         "language": lingua
       },
       success: function(data, state) {
-
+        console.log("film",data);
         var risultatoRicerca = data["results"];
 
         var templateFilm = $("#template-film").html();
@@ -48,6 +50,44 @@ $(document).ready(init);
 
           var filmHtml = compiled (risultato);
           targetListaFilms.append(filmHtml)
+        }
+      },
+      error: function(request, state, error) {
+        console.log("request",request);
+        console.log("state",state);
+        console.log("error",error);
+      }
+    });
+  }
+
+  function stampaSeieTv(apiKey,cercaTitoloFilm,lingua) {
+    $.ajax({
+      url: "https://api.themoviedb.org/3/search/tv",
+      method: "GET",
+      data:{
+        "api_key": apiKey ,
+        "query": cercaTitoloFilm,
+        "language": lingua
+      },
+      success: function(data, state) {
+        console.log("serie tv",data);
+        var risultatoRicerca = data["results"];
+
+        var templateSerieTv = $("#template-film").html();
+        var compiled = Handlebars.compile(templateSerieTv);
+        var targetListaSerieTV = $("#lista-films");
+
+        for (var i = 0; i < risultatoRicerca.length; i++) {
+          var risultato = risultatoRicerca[i];
+
+          var voto = risultatoRicerca[i]["vote_average"];
+          risultato["vote_average"] = trasformaVotoInStella(voto);
+
+          var lingua = risultato["original_language"];
+          risultato["original_language"] = trasformaLinguaInBandiera(lingua);
+
+          var serieTvHtml = compiled (risultato);
+          targetListaSerieTV.append(serieTvHtml)
         }
       },
       error: function(request, state, error) {

@@ -18,10 +18,10 @@
     <!-- Template -->
     <script id="template-film" type="text/x-handlebars-template">
       <li class="film">
-        <span>Titolo: {{title}}</span>
-        <span>Titolo Originale: {{original_title}}</span>
-        <span>Lingua: {{{original_language}}}</span>
-        <span>Voto: {{{vote_average}}}</span>
+        <span class="nero">Titolo: <span>{{title}}{{name}}</span></span>
+        <span class="nero">Titolo Originale: <span>{{original_title}}{{original_name}}</span></span>
+        <span class="nero">Lingua: <span>{{{original_language}}}</span></span>
+        <span class="nero">Voto: <span>{{{vote_average}}}</span></span>
       </li>
     </script>
 

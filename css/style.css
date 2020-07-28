@@ -52,7 +52,6 @@ ul {
   display: flex;
   flex-direction: column;
   padding: 20px;
-
 }
 
 .film span {
@@ -61,15 +60,16 @@ ul {
   line-height: 1.5;
 }
 
+.film .nero {
+  color: #000;
+}
+
 .film span img {
   height: 15px;
+  max-width: 20px;
 }
 
 .film span i {
   font-size: 15px;
   color: #616467;
-}
-
-.giallo {
-  background-color: #b8e600;
 }
