@@ -8,6 +8,11 @@ $(document).ready(init);
     keyupInput();
   }
 
+  function clicKSearch() {
+    var btnCerca = $("#cerca");
+    btnCerca.click(avvioFilmSerieTv);
+  }
+
   function keyupInput() {
     var inputCerca = $("#input-cerca");
     inputCerca.keyup(sendKeyupInput);
@@ -15,61 +20,38 @@ $(document).ready(init);
 
   function sendKeyupInput(event) {
     var tasto = event.which;
-    var input = $ (this);
-    var cercaTitoloFilm = input.val();
-    var apiKey = "a8241a9208f83d8e2fe41ee42b017580";
-    var lingua = "it-IT";
-
-    if(tasto == 13 && cercaTitoloFilm.length > 0) {
-      stampaFilms(apiKey,cercaTitoloFilm,lingua);
-      stampaSeieTv(apiKey,cercaTitoloFilm,lingua);
+    var input = $ (this).val();
+    if (tasto == 13 && input.length > 0) {
+      avvioFilmSerieTv();
     }
   }
 
-  function clicKSearch() {
-    var btnCerca = $("#cerca");
-    btnCerca.click(function(){
-      var apiKey = "a8241a9208f83d8e2fe41ee42b017580";
-      var cercaTitoloFilm = $("#input-cerca").val();
-      var lingua = "it-IT";
-      stampaFilms(apiKey,cercaTitoloFilm,lingua);
-      stampaSeieTv(apiKey,cercaTitoloFilm,lingua);
-    });
+  function avvioFilmSerieTv() {
+    var apiKey = "a8241a9208f83d8e2fe41ee42b017580";
+    var cercaTitolo = $("#input-cerca").val();
+    var lingua = "it-IT";
+    var targetListaFilms = $("#lista-films");
+    targetListaFilms.html("");
+    var targetListaSerieTv = $("#lista-serie");
+    targetListaSerieTv.html("");
+    stampaFilms(apiKey,cercaTitolo,lingua);
+    stampaSerieTv(apiKey,cercaTitolo,lingua);
   }
 
-  function stampaFilms(apiKey,cercaTitoloFilm,lingua) {
+  function stampaFilms(apiKey,cercaTitolo,lingua) {
     $.ajax({
       url: "https://api.themoviedb.org/3/search/movie",
       method: "GET",
       data:{
         "api_key": apiKey ,
-        "query": cercaTitoloFilm,
+        "query": cercaTitolo,
         "language": lingua
       },
       success: function(data, state) {
         console.log("film",data);
-        var risultatoRicerca = data["results"];
-
-        var templateFilm = $("#template-film").html();
-        var compiled = Handlebars.compile(templateFilm);
+        var cinema = $("#cinema").removeClass("invisibile");
         var targetListaFilms = $("#lista-films");
-        targetListaFilms.html("");
-
-        for (var i = 0; i < risultatoRicerca.length; i++) {
-          var risultato = risultatoRicerca[i];
-
-          var voto = risultatoRicerca[i]["vote_average"];
-          risultato["vote_average"] = trasformaVotoInStella(voto);
-
-          var lingua = risultato["original_language"];
-          risultato["original_language"] = trasformaLinguaInBandiera(lingua);
-
-          var copertina = risultato["poster_path"];
-          risultato["poster_path"] = inserisciCopertina(copertina);
-
-          var filmHtml = compiled (risultato);
-          targetListaFilms.append(filmHtml)
-        }
+        addTemplete(data,targetListaFilms);
       },
       error: function(request, state, error) {
         console.log("request",request);
@@ -79,38 +61,20 @@ $(document).ready(init);
     });
   }
 
-  function stampaSeieTv(apiKey,cercaTitoloFilm,lingua) {
+  function stampaSerieTv(apiKey,cercaTitolo,lingua) {
     $.ajax({
       url: "https://api.themoviedb.org/3/search/tv",
       method: "GET",
       data:{
         "api_key": apiKey ,
-        "query": cercaTitoloFilm,
+        "query": cercaTitolo,
         "language": lingua
       },
       success: function(data, state) {
         console.log("serie tv",data);
-        var risultatoRicerca = data["results"];
-
-        var templateSerieTv = $("#template-film").html();
-        var compiled = Handlebars.compile(templateSerieTv);
-        var targetListaSerieTV = $("#lista-films");
-
-        for (var i = 0; i < risultatoRicerca.length; i++) {
-          var risultato = risultatoRicerca[i];
-
-          var voto = risultatoRicerca[i]["vote_average"];
-          risultato["vote_average"] = trasformaVotoInStella(voto);
-
-          var lingua = risultato["original_language"];
-          risultato["original_language"] = trasformaLinguaInBandiera(lingua);
-
-          var copertina = risultato["poster_path"];
-          risultato["poster_path"] = inserisciCopertina(copertina);
-
-          var serieTvHtml = compiled (risultato);
-          targetListaSerieTV.append(serieTvHtml)
-        }
+        var serieTV = $("#serie-tv").removeClass("invisibile");
+        var targetListaSerieTV = $("#lista-serie");
+        addTemplete(data,targetListaSerieTV);
       },
       error: function(request, state, error) {
         console.log("request",request);
@@ -118,6 +82,29 @@ $(document).ready(init);
         console.log("error",error);
       }
     });
+  }
+
+  function addTemplete(data,target) {
+    var risultatoRicerca = data["results"];
+
+    var templateFilmSerie = $("#template-film-serie").html();
+    var compiled = Handlebars.compile(templateFilmSerie);
+
+    for (var i = 0; i < risultatoRicerca.length; i++) {
+      var risultato = risultatoRicerca[i];
+
+      var voto = risultatoRicerca[i]["vote_average"];
+      risultato["vote_average"] = trasformaVotoInStella(voto);
+
+      var lingua = risultato["original_language"];
+      risultato["original_language"] = trasformaLinguaInBandiera(lingua);
+
+      var copertina = risultato["poster_path"];
+      risultato["poster_path"] = inserisciCopertina(copertina);
+
+      var filmSerieHtml = compiled (risultato);
+      target.append(filmSerieHtml);
+    }
   }
 
   function trasformaVotoInStella(voto) {
@@ -135,27 +122,11 @@ $(document).ready(init);
 
   function trasformaLinguaInBandiera(lingua) {
     var bandiera = lingua;
-    if (lingua === "en") {
-      bandiera = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png" alt="">';
-      return bandiera;
-    } else if (lingua === "it") {
-      bandiera = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/640px-Flag_of_Italy.svg.png" alt="">';
-      return bandiera;
-    } else if (lingua === "fr") {
-      bandiera = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/280px-Flag_of_France.svg.png" alt="">';
-      return bandiera;
-    } else if (lingua === "es") {
-      bandiera = '<img src="https://images-na.ssl-images-amazon.com/images/I/41vY%2BlH0M2L._AC_SX450_.jpg" alt="">';
-      return bandiera;
-    } else if (lingua === "cn") {
-      bandiera = '<img src="https://www.corriereasia.com/wp-content/uploads/bandiera-della-cina.png" alt="">';
-      return bandiera;
-    } else if (lingua === "ja") {
-      bandiera = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/280px-Flag_of_Japan.svg.png" alt="">';
-      return bandiera;
-    } else {
+    if (lingua === "en" || lingua === "it" || lingua === "fr" ||      lingua === "es" || lingua === "cn" || lingua === "ja") {
+      bandiera = `<img src="img/${lingua}.png" alt="">`;
       return bandiera;
     }
+    return bandiera;
   }
 
   function inserisciCopertina(copertina) {
@@ -165,7 +136,7 @@ $(document).ready(init);
       copertinaFilm = '<img src="'+ url + dimensioneImg + copertina + '" alt="">';
       return copertinaFilm;
     } else {
-      copertinaFilm = '<img class="smile" src="img/smiley-sad.png" alt="">' + '<span class="nero">Nessuna immagine</span>';
+      copertinaFilm = '<img class="smile" src="img/smiley-sad.png" alt="">' + '<span class="colore-1 ">Nessuna immagine</span>';
       return copertinaFilm;
     }
   }

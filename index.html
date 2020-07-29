@@ -18,7 +18,7 @@
     <!-- Handlebars -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
     <!-- Template -->
-    <script id="template-film" type="text/x-handlebars-template">
+    <script id="template-film-serie" type="text/x-handlebars-template">
       <li class="film">
         <div class="copertina">
           {{{poster_path}}}
@@ -34,7 +34,6 @@
         </div>
       </li>
     </script>
-
     <!-- JavaScript -->
     <script type="text/javascript" src="js/script.js"></script>
   </head>
@@ -62,13 +61,16 @@
             <li><a href="#">Offerte</a></li>
             <li><a href="#"><i class="far fa-user"></i> Profilo</a></li>
           </ul>
-
         </div>
       </nav>
     </header>
     <main>
       <div class="contenitore-films">
+        <h1 id="cinema" class="invisibile">Cinema</h1>
         <ul id="lista-films">
+        </ul>
+        <h1 id="serie-tv" class="invisibile">Serie TV</h1>
+        <ul id="lista-serie">
         </ul>
       </div>
     </main>
