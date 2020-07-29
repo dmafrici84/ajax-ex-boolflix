@@ -6,6 +6,7 @@ $(document).ready(init);
   function init(){
     clicKSearch();
     keyupInput();
+    clickMenuHamburger();
   }
 
   function clicKSearch() {
@@ -34,11 +35,11 @@ $(document).ready(init);
     targetListaFilms.html("");
     var targetListaSerieTv = $("#lista-serie");
     targetListaSerieTv.html("");
-    stampaFilms(apiKey,cercaTitolo,lingua);
-    stampaSerieTv(apiKey,cercaTitolo,lingua);
+    stampaFilms(apiKey,cercaTitolo,lingua,targetListaFilms);
+    stampaSerieTv(apiKey,cercaTitolo,lingua,targetListaSerieTv);
   }
 
-  function stampaFilms(apiKey,cercaTitolo,lingua) {
+  function stampaFilms(apiKey,cercaTitolo,lingua,targetListaFilms) {
     $.ajax({
       url: "https://api.themoviedb.org/3/search/movie",
       method: "GET",
@@ -50,7 +51,6 @@ $(document).ready(init);
       success: function(data, state) {
         console.log("film",data);
         var cinema = $("#cinema").removeClass("invisibile");
-        var targetListaFilms = $("#lista-films");
         addTemplete(data,targetListaFilms);
       },
       error: function(request, state, error) {
@@ -61,7 +61,7 @@ $(document).ready(init);
     });
   }
 
-  function stampaSerieTv(apiKey,cercaTitolo,lingua) {
+  function stampaSerieTv(apiKey,cercaTitolo,lingua,targetListaSerieTv) {
     $.ajax({
       url: "https://api.themoviedb.org/3/search/tv",
       method: "GET",
@@ -73,8 +73,7 @@ $(document).ready(init);
       success: function(data, state) {
         console.log("serie tv",data);
         var serieTV = $("#serie-tv").removeClass("invisibile");
-        var targetListaSerieTV = $("#lista-serie");
-        addTemplete(data,targetListaSerieTV);
+        addTemplete(data,targetListaSerieTv);
       },
       error: function(request, state, error) {
         console.log("request",request);
@@ -139,4 +138,27 @@ $(document).ready(init);
       copertinaFilm = '<img class="smile" src="img/smiley-sad.png" alt="">' + '<span class="colore-1 ">Nessuna immagine</span>';
       return copertinaFilm;
     }
+  }
+
+  function clickMenuHamburger() {
+    clickApriHamburger();
+    clicKChiudiHamburger();
+  }
+
+  function clickApriHamburger() {
+    var btnApriHamburger = $(".hamburger");
+    btnApriHamburger.click(function() {
+      console.log("btnApriHamburger-prima",$(".hamburger-menu"));
+      $(".hamburger-menu").addClass("visibile");
+      console.log("btnApriHamburger-dopo",$(".hamburger-menu"));
+    });
+  }
+
+  function clicKChiudiHamburger() {
+    var btnChiudiHamburger = $(".chiudi");
+    btnChiudiHamburger.click(function() {
+      console.log("btnChiudiHamburger-prima",$(".hamburger-menu"));
+      $(".hamburger-menu").removeClass("visibile");
+      console.log("btnChiudiHamburger-dopo",$(".hamburger-menu"));
+    });
   }

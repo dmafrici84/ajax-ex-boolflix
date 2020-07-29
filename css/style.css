@@ -12,8 +12,6 @@ body {
 
 ul {
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
 }
 
 a {
@@ -58,6 +56,10 @@ nav ul li {
   margin-right: 20px;
 }
 
+.link-nav > ul, .cerca-nav  > ul {
+  display: flex;
+}
+
 .cerca-nav  ul li a {
   font-family: Roboto, sans-serif;
   font-weight: 300;
@@ -66,12 +68,48 @@ nav ul li {
 }
 
 .cerca-nav ul li a i {
-  font-weight: 700;
   font-size: 20px;
 }
 
 nav ul li a:hover {
   color: #fff;
+}
+
+.hamburger {
+  display: none;
+}
+
+.hamburger > a i {
+  font-size: 25px;
+}
+
+.hamburger-menu {
+  position: fixed;
+  top: 90px;
+  left: 0;
+  z-index: 89;
+  display: none;
+  width: 100%;
+  height: 300px;
+  min-height: 300px;
+  background-color: #151924;;
+  padding: 20px 2.5%;
+}
+
+.hamburger-menu ul {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger-menu .chiudi {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: #dde8ed;;
+  font-size: 20px;
 }
 
 .cerca {
@@ -107,6 +145,10 @@ nav ul li a:hover {
   color: #fff;
 }
 
+.link-2 {
+  display: none;
+}
+
 /* main */
 .contenitore-films {
   width: 95%;
@@ -119,8 +161,17 @@ nav ul li a:hover {
   padding-bottom: 20px;
 }
 
+.contenitore-films ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .invisibile {
   display: none;
+}
+
+.visibile {
+  display: block;
 }
 
 /* template */
@@ -169,7 +220,7 @@ nav ul li a:hover {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 89;
+  z-index: 79;
   opacity: 0;
   transition: all .35s;
 }
@@ -218,3 +269,47 @@ nav ul li a:hover {
 .giallo {
   color: #b8e600;
 }
+
+/* VERSIONE MD */
+@media all and (max-width: 1023px) {
+
+  .hamburger {
+    display: block;
+  }
+
+  .link {
+    display: none;
+  }
+
+}
+
+/* VERSIONE XS */
+@media all and (max-width: 768px) {
+
+  nav ul li {
+    margin-right: 10px;
+  }
+
+  .cerca {
+    width: 200px;
+    padding-right: 8px;
+  }
+
+  #input-cerca {
+    width: 165px;
+    padding: 4px 8px;
+    font-size: 15px;
+  }
+
+  .cerca-nav ul li a {
+    padding-left: 10px;
+  }
+
+  .link-1 {
+    display: none;
+  }
+
+  .link-2 {
+    display: block;
+    margin-right: 0;
+  }

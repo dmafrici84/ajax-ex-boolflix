@@ -5,6 +5,8 @@
     <title>ajax-ex-boolflix</title>
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <!--scala e no zoom versione mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- Fontawesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <!-- google fonts -->
@@ -45,9 +47,28 @@
       <nav>
         <div class="link-nav">
           <ul>
-            <li><a href="#">HOME</a></li>
-            <li><a href="#">CINEMA</a></li>
-            <li><a href="#">SERIE TV</a></li>
+            <li class="hamburger">
+              <a href="#">
+                <i class="fas fa-bars"></i>
+              </a>
+              <!-- Blocco menu hamburger -->
+              <div class="hamburger-menu">
+                <ul>
+                  <li><a href="#">HOME</a></li>
+                  <li><a href="#">CINEMA</a></li>
+                  <li><a href="#">SERIE TV</a></li>
+                  <li><a href="#">Offerte</a></li>
+                  <li><a href="#"><i class="far fa-user"></i> Profilo</a>
+                  </li>
+                </ul>
+                <a href="#" class="chiudi">
+                  <i class="fas fa-times"></i>
+                </a>
+              </div>
+            </li>
+            <li class="link"><a href="#">HOME</a></li>
+            <li class="link"><a href="#">CINEMA</a></li>
+            <li class="link"><a href="#">SERIE TV</a></li>
           </ul>
         </div>
         <div class="cerca-nav">
@@ -58,8 +79,9 @@
                 <i id="cerca" class="fas fa-search"></i>
               </div>
             </li>
-            <li><a href="#">Offerte</a></li>
-            <li><a href="#"><i class="far fa-user"></i> Profilo</a></li>
+            <li class="link"><a href="#">Offerte</a></li>
+            <li class="link-1"><a href="#"><i class="far fa-user"></i> Profilo</a></li>
+            <li class="link-2"><a href="#"><i class="far fa-user"></i></a></li>
           </ul>
         </div>
       </nav>
@@ -69,7 +91,7 @@
         <h1 id="cinema" class="invisibile">Cinema</h1>
         <ul id="lista-films">
         </ul>
-        <h1 id="serie-tv" class="invisibile">Serie TV</h1>
+        <h1 id="serie-tv" class="invisibile">Serie Tv</h1>
         <ul id="lista-serie">
         </ul>
       </div>
