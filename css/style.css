@@ -92,7 +92,7 @@ nav ul li a:hover {
   width: 100%;
   height: 300px;
   min-height: 300px;
-  background-color: #151924;;
+  background-color: #151924;
   padding: 20px 2.5%;
 }
 
@@ -150,20 +150,62 @@ nav ul li a:hover {
 }
 
 /* main */
-.contenitore-films {
-  width: 95%;
-  margin: 120px auto 20px;
+.contenitore {
+  margin: 120px 0 20px 2.5%;
 }
 
-.contenitore-films h1 {
+.contenitore h1 {
   color: #dde8ed;
   font-size: 45px;
   padding-bottom: 20px;
 }
 
-.contenitore-films ul {
+.contenitore ul {
   display: flex;
-  flex-wrap: wrap;
+}
+
+.contenitore ul li{
+  min-width: 342px;
+}
+
+.contenitore-lista {
+  position: relative;
+}
+
+.precedente {
+  position: absolute;
+  top: 50%;
+  left:50px;
+  z-index: 79;
+  transform: translateY(-50%);
+  width: 70px;
+  height: 70px;
+  font-size: 40px;
+  font-weight: 300;
+  background-color: rgba(21, 25, 36, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.successivo {
+  position: absolute;
+  top: 50%;
+  right: 50px;
+  z-index: 79;
+  transform: translateY(-50%);
+  width: 70px;
+  height: 70px;
+  background-color:rgba(21, 25, 36, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.precedente i, .successivo i {
+  font-size: 40px;
+  font-weight: 600;
+  color: #dde8ed;
 }
 
 .invisibile {
@@ -220,7 +262,7 @@ nav ul li a:hover {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 79;
+  z-index: 29;
   opacity: 0;
   transition: all .35s;
 }

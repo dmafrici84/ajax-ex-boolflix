@@ -6,6 +6,7 @@ $(document).ready(init);
   function init(){
     clicKSearch();
     keyupInput();
+    appareScompareSuccessivo();
     clickMenuHamburger();
   }
 
@@ -49,7 +50,6 @@ $(document).ready(init);
         "language": lingua
       },
       success: function(data, state) {
-        console.log("film",data);
         var cinema = $("#cinema").removeClass("invisibile");
         addTemplete(data,targetListaFilms);
       },
@@ -71,7 +71,6 @@ $(document).ready(init);
         "language": lingua
       },
       success: function(data, state) {
-        console.log("serie tv",data);
         var serieTV = $("#serie-tv").removeClass("invisibile");
         addTemplete(data,targetListaSerieTv);
       },
@@ -140,25 +139,45 @@ $(document).ready(init);
     }
   }
 
+  function appareScompareSuccessivo() {
+    appareSuccessivo();
+    scompareSuccessivo();
+  }
+
+  function appareSuccessivo() {
+    $(".contenitore-lista").mouseenter(function(){
+      successivo = $(this).children(".successivo")
+      successivo.removeClass("invisibile");
+      successivo.click(apparePrecedente);
+    });
+  }
+
+  function scompareSuccessivo() {
+    $(".contenitore-lista").mouseleave(function(){
+      $(this).children(".successivo").addClass("invisibile");
+      $(this).children(".precedente").addClass("invisibile");
+    });
+  }
+
+  function apparePrecedente() {
+    $(this).siblings(".precedente").removeClass("invisibile");
+  }
+
   function clickMenuHamburger() {
     clickApriHamburger();
     clicKChiudiHamburger();
   }
 
   function clickApriHamburger() {
-    var btnApriHamburger = $(".hamburger");
+    var btnApriHamburger = $(".hamburger .fa-bars");
     btnApriHamburger.click(function() {
-      console.log("btnApriHamburger-prima",$(".hamburger-menu"));
       $(".hamburger-menu").addClass("visibile");
-      console.log("btnApriHamburger-dopo",$(".hamburger-menu"));
     });
   }
 
   function clicKChiudiHamburger() {
     var btnChiudiHamburger = $(".chiudi");
     btnChiudiHamburger.click(function() {
-      console.log("btnChiudiHamburger-prima",$(".hamburger-menu"));
       $(".hamburger-menu").removeClass("visibile");
-      console.log("btnChiudiHamburger-dopo",$(".hamburger-menu"));
     });
   }
