@@ -49,8 +49,9 @@ $(document).ready(init);
         "language": lingua
       },
       success: function(data, state) {
+        console.log("cinema",data);
         var cinema = $("#cinema").removeClass("invisibile");
-        addTemplete(data,targetListaFilms);
+        addTemplete(data,targetListaFilms,apiKey);
       },
       error: function(request, state, error) {
         console.log("request",request);
@@ -71,7 +72,8 @@ $(document).ready(init);
       },
       success: function(data, state) {
         var serieTV = $("#serie-tv").removeClass("invisibile");
-        addTemplete(data,targetListaSerieTv);
+        console.log("serie",data);
+        addTemplete(data,targetListaSerieTv,apiKey);
       },
       error: function(request, state, error) {
         console.log("request",request);
@@ -81,11 +83,8 @@ $(document).ready(init);
     });
   }
 
-  function addTemplete(data,target) {
+  function addTemplete(data,target,apiKey) {
     var risultatoRicerca = data["results"];
-
-    var templateFilmSerie = $("#template-film-serie").html();
-    var compiled = Handlebars.compile(templateFilmSerie);
 
     for (var i = 0; i < risultatoRicerca.length; i++) {
       var risultato = risultatoRicerca[i];
@@ -99,11 +98,8 @@ $(document).ready(init);
       var copertina = risultato["poster_path"];
       risultato["poster_path"] = inserisciCopertina(copertina);
 
-      var valore = i;
-      risultato.valore = valore;
-
-      var filmSerieHtml = compiled (risultato);
-      target.append(filmSerieHtml);
+      var id = risultato["id"];
+      stampaAttori(id,apiKey,risultato,target);
     }
   }
 
@@ -139,6 +135,33 @@ $(document).ready(init);
       copertinaFilm = '<img class="smile" src="img/smiley-sad.png" alt="">' + '<span class="colore-1 ">Nessuna immagine</span>';
       return copertinaFilm;
     }
+  }
+
+  function stampaAttori(id,apiKey,risultato,target) {
+    $.ajax({
+      url: "https://api.themoviedb.org/3/movie/" + id + "/credits",
+      method: "GET",
+      data:{
+        "api_key": apiKey
+      },
+      success: function(data, state) {
+        var templateFilmSerie = $("#template-film-serie").html();
+        var compiled = Handlebars.compile(templateFilmSerie);
+        var attori ="";
+        var listaAttori = data["cast"];
+        for (var i = 0; i < listaAttori.length; i++) {
+          attori += listaAttori[i]["name"];
+        }
+        risultato.actor = attori;
+        var filmSerieHtml = compiled (risultato);
+        target.append(filmSerieHtml);
+      },
+      error: function(request, state, error) {
+        console.log("request",request);
+        console.log("state",state);
+        console.log("error",error);
+      }
+    });
   }
 
   function clickMenuHamburger() {

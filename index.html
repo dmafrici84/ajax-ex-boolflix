@@ -21,7 +21,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
     <!-- Template -->
     <script id="template-film-serie" type="text/x-handlebars-template">
-      <li class="film" data-id={{valore}}>
+      <li class="film">
         <div class="copertina">
           {{{poster_path}}}
         </div>
@@ -31,6 +31,8 @@
             <span class="bianco">Titolo Originale: <span>{{original_title}}{{original_name}}</span></span>
             <span class="bianco">Lingua Originale: <span>{{{original_language}}}</span></span>
             <span class="bianco">Voto: <span>{{{vote_average}}}</span></span>
+            <span class="bianco">Attori:
+            <span>{{{actor}}}</span></span>
             <p>{{overview}}</p>
           </div>
         </div>
