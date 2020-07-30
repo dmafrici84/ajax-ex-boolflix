@@ -21,7 +21,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
     <!-- Template -->
     <script id="template-film-serie" type="text/x-handlebars-template">
-      <li class="film">
+      <li class="film" data-id={{valore}}>
         <div class="copertina">
           {{{poster_path}}}
         </div>
@@ -89,25 +89,9 @@
     <main>
       <div class="contenitore">
         <h1 id="cinema" class="invisibile">Cinema</h1>
-        <div class="contenitore-lista">
-          <div class="precedente invisibile">
-            <i class="fas fa-angle-left"></i>
-          </div>
-          <ul id="lista-films"></ul>
-          <div class="successivo invisibile">
-            <i class="fas fa-angle-right"></i>
-          </div>
-        </div>
+        <ul id="lista-films"></ul>
         <h1 id="serie-tv" class="invisibile">Serie Tv</h1>
-        <div class="contenitore-lista">
-          <div class="precedente invisibile">
-            <i class="fas fa-angle-left"></i>
-          </div>
-          <ul id="lista-serie"></ul>
-          <div class="successivo invisibile">
-            <i class="fas fa-angle-right"></i>
-          </div>
-        </div>
+        <ul id="lista-serie"></ul>
       </div>
     </main>
   </body>

@@ -6,7 +6,6 @@ $(document).ready(init);
   function init(){
     clicKSearch();
     keyupInput();
-    appareScompareSuccessivo();
     clickMenuHamburger();
   }
 
@@ -100,6 +99,9 @@ $(document).ready(init);
       var copertina = risultato["poster_path"];
       risultato["poster_path"] = inserisciCopertina(copertina);
 
+      var valore = i;
+      risultato.valore = valore;
+
       var filmSerieHtml = compiled (risultato);
       target.append(filmSerieHtml);
     }
@@ -128,39 +130,15 @@ $(document).ready(init);
   }
 
   function inserisciCopertina(copertina) {
-    if (copertina != null) {
+    if (copertina) {
       var url = "https://image.tmdb.org/t/p/";
       var dimensioneImg = "w342";
-      copertinaFilm = '<img src="'+ url + dimensioneImg + copertina + '" alt="">';
+      copertinaFilm = `<img src="${url}${dimensioneImg}${copertina}" alt="">`;
       return copertinaFilm;
     } else {
       copertinaFilm = '<img class="smile" src="img/smiley-sad.png" alt="">' + '<span class="colore-1 ">Nessuna immagine</span>';
       return copertinaFilm;
     }
-  }
-
-  function appareScompareSuccessivo() {
-    appareSuccessivo();
-    scompareSuccessivo();
-  }
-
-  function appareSuccessivo() {
-    $(".contenitore-lista").mouseenter(function(){
-      successivo = $(this).children(".successivo")
-      successivo.removeClass("invisibile");
-      successivo.click(apparePrecedente);
-    });
-  }
-
-  function scompareSuccessivo() {
-    $(".contenitore-lista").mouseleave(function(){
-      $(this).children(".successivo").addClass("invisibile");
-      $(this).children(".precedente").addClass("invisibile");
-    });
-  }
-
-  function apparePrecedente() {
-    $(this).siblings(".precedente").removeClass("invisibile");
   }
 
   function clickMenuHamburger() {

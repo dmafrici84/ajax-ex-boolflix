@@ -151,7 +151,8 @@ nav ul li a:hover {
 
 /* main */
 .contenitore {
-  margin: 120px 0 20px 2.5%;
+  width: 95%;
+  margin: 120px auto 20px;
 }
 
 .contenitore h1 {
@@ -162,58 +163,12 @@ nav ul li a:hover {
 
 .contenitore ul {
   display: flex;
-}
-
-.contenitore ul li{
-  min-width: 342px;
-}
-
-.contenitore-lista {
-  position: relative;
-}
-
-.precedente {
-  position: absolute;
-  top: 50%;
-  left:50px;
-  z-index: 79;
-  transform: translateY(-50%);
-  width: 70px;
-  height: 70px;
-  font-size: 40px;
-  font-weight: 300;
-  background-color: rgba(21, 25, 36, 0.2);
-  display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-.successivo {
-  position: absolute;
-  top: 50%;
-  right: 50px;
-  z-index: 79;
-  transform: translateY(-50%);
-  width: 70px;
-  height: 70px;
-  background-color:rgba(21, 25, 36, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.precedente i, .successivo i {
-  font-size: 40px;
-  font-weight: 600;
-  color: #dde8ed;
+  flex-wrap: wrap;
 }
 
 .invisibile {
   display: none;
-}
-
-.visibile {
-  display: block;
 }
 
 /* template */
@@ -221,7 +176,7 @@ nav ul li a:hover {
   width: 342px;
   height: 513px;
   margin-bottom: 50px;
-  margin-right: 10px;
+  margin-right: 12px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -313,7 +268,7 @@ nav ul li a:hover {
 }
 
 /* VERSIONE MD */
-@media all and (max-width: 1023px) {
+@media all and (max-width: 1120px) {
 
   .hamburger {
     display: block;
@@ -323,10 +278,29 @@ nav ul li a:hover {
     display: none;
   }
 
+  .contenitore h1 {
+    font-size: 42px;
+  }
+
+  .film {
+    width: 313px;
+    height: 469.5px;
+  }
+
 }
 
 /* VERSIONE XS */
-@media all and (max-width: 768px) {
+@media all and (max-width: 760px) {
+
+  header .logo {
+    width: calc(100% - 20px);
+    margin: 0 10px;
+  }
+
+  header nav {
+    width: calc(100% - 20px);
+    margin: 0 10px;
+  }
 
   nav ul li {
     margin-right: 10px;
@@ -354,4 +328,25 @@ nav ul li a:hover {
   .link-2 {
     display: block;
     margin-right: 0;
+  }
+
+  .contenitore {
+    width: 100%;
+  }
+
+  .contenitore h1 {
+    font-size: 40px;
+    margin-left: 10px;
+  }
+
+  .film {
+    width: 280px;
+    height: 420px;
+    margin-bottom: 30px;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  .film:hover .contenitore-info-film {
+    transform: scale(1);
   }
