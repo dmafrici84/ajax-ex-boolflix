@@ -86,6 +86,9 @@ $(document).ready(init);
   function addTemplete(data,target,apiKey) {
     var risultatoRicerca = data["results"];
 
+    var templateFilmSerie = $("#template-film-serie").html();
+    var compiled = Handlebars.compile(templateFilmSerie);
+
     for (var i = 0; i < risultatoRicerca.length; i++) {
       var risultato = risultatoRicerca[i];
 
@@ -99,7 +102,7 @@ $(document).ready(init);
       risultato["poster_path"] = inserisciCopertina(copertina);
 
       var id = risultato["id"];
-      stampaAttori(id,apiKey,risultato,target);
+      stampaAttori(id,apiKey,risultato,target,compiled);
     }
   }
 
@@ -137,7 +140,7 @@ $(document).ready(init);
     }
   }
 
-  function stampaAttori(id,apiKey,risultato,target) {
+  function stampaAttori(id,apiKey,risultato,target,compiled) {
     $.ajax({
       url: "https://api.themoviedb.org/3/movie/" + id + "/credits",
       method: "GET",
@@ -145,21 +148,28 @@ $(document).ready(init);
         "api_key": apiKey
       },
       success: function(data, state) {
-        var templateFilmSerie = $("#template-film-serie").html();
-        var compiled = Handlebars.compile(templateFilmSerie);
         var attori ="";
         var listaAttori = data["cast"];
-        for (var i = 0; i < listaAttori.length; i++) {
-          attori += listaAttori[i]["name"];
+        if (listaAttori.length != 0) {
+          for (var i = 0; i < listaAttori.length; i++) {
+            if (i < 5) {
+              attori += " " + listaAttori[i]["name"] + ",";
+            }
+          }
+          risultato.actor = attori;
+          var filmSerieHtml = compiled (risultato);
+          target.append(filmSerieHtml);
+        } else {
+          risultato.actor = "Non Disponibile";
+          var filmSerieHtml = compiled (risultato);
+          target.append(filmSerieHtml);
         }
-        risultato.actor = attori;
-        var filmSerieHtml = compiled (risultato);
-        target.append(filmSerieHtml);
       },
       error: function(request, state, error) {
-        console.log("request",request);
-        console.log("state",state);
-        console.log("error",error);
+        console.log("errori attori",id);
+        risultato.actor = "Non Disponibile";
+        var filmSerieHtml = compiled (risultato);
+        target.append(filmSerieHtml);
       }
     });
   }

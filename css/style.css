@@ -229,7 +229,7 @@ nav ul li a:hover {
   flex-direction: column;
   justify-content: flex-start;
   padding: 13px;
-  background-color: #151924;
+  background-color: rgba(21, 25, 36, 0.97);
 }
 
 .film .info-film span {
