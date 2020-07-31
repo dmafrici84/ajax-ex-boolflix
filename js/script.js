@@ -153,7 +153,7 @@ $(document).ready(init);
         if (listaAttori.length != 0) {
           for (var i = 0; i < listaAttori.length; i++) {
             if (i < 5) {
-              attori += " " + listaAttori[i]["name"] + ",";
+              attori += listaAttori[i]["name"] + " - ";
             }
           }
           risultato.actor = attori;
